@@ -15,14 +15,9 @@ const boardTarget = {
     if (item.onBoard) {
       component.moveCover(item.id, left, top)
     } else {
-      component.addCover(item)
+      component.addCover(item, left, top)
     }
   }
-}
-
-const propTypes = {
-  hideSourceOnDrag: PropTypes.bool.isRequired,
-  connectDropTarget: PropTypes.func.isRequired
 }
 
 function collect(connect, monitor) {
@@ -40,41 +35,46 @@ export class Board extends Component {
     })
   }
 
-  addCover(cover) {
+  addCover(cover, left, top) {
     this.props.addToBoard(
       {
         cover: cover.image,
-        left: 0,
-        top: 0
+        left: left,
+        top: top
       }
     )
   }
-
-  render() {
-    console.log('hi')
-    const { hideSourceOnDrag, connectDropTarget, covers } = this.props
+  getCovers() {
+    const { covers } = this.props
     const coversArray = covers.toJS()
+    return coversArray.map((cover, idx) => {
+      const { left, top, title, type} = cover
+      return (
+        <Cover key={idx}
+             id={idx}
+             left={left}
+             top={top}
+             onBoard={true}
+             image={cover.cover}
+             hideSourceOnDrag={true}>
+          {title}
+        </Cover>
+      )
+    })
+  }
+  render() {
+    const { connectDropTarget }  = this.props
     return connectDropTarget(
       <div className='board'>
-        {coversArray.map((cover, idx) => {
-          const { left, top, title, type} = cover
-          return (
-            <Cover key={idx}
-                 id={idx}
-                 left={left}
-                 top={top}
-                 onBoard={true}
-                 image={cover.cover}
-                 hideSourceOnDrag={hideSourceOnDrag}>
-              {title}
-            </Cover>
-          )
-        })}
+        { this.getCovers() }
       </div>
     )
   }
 }
 
-Board.propTypes = propTypes
+Board.propTypes = {
+  hideSourceOnDrag: PropTypes.bool.isRequired,
+  connectDropTarget: PropTypes.func.isRequired
+}
 
 export default DropTarget('box', boardTarget, collect)(Board)

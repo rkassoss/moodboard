@@ -4,8 +4,7 @@ export function setSearchResults(state, response) {
   const covers = []
   response.projects.map((p) => {
     covers.push({
-      cover: p.covers[202],
-      coverRetina: p.covers[404]
+      image: p.covers[202]
     })
   })
   return state.set('covers', fromJS(covers))

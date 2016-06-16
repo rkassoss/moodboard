@@ -3,7 +3,19 @@ import { DragSource } from 'react-dnd'
 
 const CoverSource = {
   beginDrag(props) {
-    const { id, left, top, onBoard, image } = props
+    let { id, left, top, onBoard, image } = props
+    if(!onBoard) {
+      if (id > 5) {
+        left = left + 202 * (id - 6)
+        top = top - 150
+
+      } else {
+        left = left + 202 * id
+        top = top - 300
+
+      }
+      return { id, left, top, onBoard, image }
+    }
     return { id, left, top, onBoard, image }
   }
 }
@@ -22,7 +34,6 @@ export class Cover extends Component {
     if (isDragging && hideSourceOnDrag) {
       return null
     }
-    console.log(this.props.image)
     return connectDragSource(
       <div className='cover' style={{ left, top, backgroundImage:`url(${this.props.image})`}}>
         {children}
