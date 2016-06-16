@@ -1,9 +1,14 @@
 import { updateBoard, addToBoard, renameBoard, createBoard, switchBoard } from './reducers/board'
-import { setSearchResults, searchError } from './reducers/covers'
+import { setSearchResults, setRecentRequest, searchError, changeSearchPage } from './reducers/covers'
 import { Map, List } from 'immutable'
 
 const INITIAL_STATE = Map({
   activeBoard: 0,
+  requests: Map({
+    baseUrl: 'https://crossorigin.me/https://www.behance.net/v2/projects?client_id=FPPjPLS6sD6RL7XqmGyaaKJ1fgbhRnDh',
+    recentUrl: null,
+    page: 1
+  }),
   covers: List.of(),
   boards: List.of(
     Map({
@@ -19,6 +24,10 @@ export default function (state = INITIAL_STATE, action) {
       return setSearchResults(state, action.response)
     case 'SEARCH_ERROR':
       return state
+    case 'CHANGE_SEARCH_PAGE':
+      return changeSearchPage(state, action.page)
+    case 'SET_RECENT_REQUEST':
+      return setRecentRequest(state, action.url)
     case 'ADD_TO_BOARD':
       return addToBoard(state, action.cover)
     case 'UPDATE_BOARD':

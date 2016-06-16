@@ -42,9 +42,17 @@ body {
 .board-control {
   display: block;
   width: 50%;
+  padding: 10px;
   margin: auto;
   form {
     padding: 0 10px;
     display: inline-block;
+  }
+}
+
+
+.board-navigation {
+  a {
+    margin: 0 10px;
   }
 }

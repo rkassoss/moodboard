@@ -7,12 +7,10 @@ const CoverSource = {
     if(!onBoard) {
       if (id > 5) {
         left = left + 202 * (id - 6)
-        top = top - 150
-
+        top = top - 164
       } else {
         left = left + 202 * id
-        top = top - 300
-
+        top = top - 322
       }
       return { id, left, top, onBoard, image }
     }

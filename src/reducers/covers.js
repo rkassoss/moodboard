@@ -1,4 +1,4 @@
-import { fromJS } from 'immutable'
+import { Map, fromJS } from 'immutable'
 
 export function setSearchResults(state, response) {
   const covers = []
@@ -12,4 +12,16 @@ export function setSearchResults(state, response) {
 
 export function searchError(state) {
   return state
+}
+
+export function setRecentRequest(state, url) {
+  return state.update('requests', (r) => {
+    return r.set('recentUrl', url).set('page', 1)
+  })
+}
+
+export function changeSearchPage(state, page) {
+  return state.update('requests', (r) => {
+    return r.set('page', page)
+  })
 }

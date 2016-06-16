@@ -2,7 +2,7 @@ import request from 'superagent'
 
 export function searchCovers(query) {
   return function (dispatch, getState) {
-    const requestUrl = `https://crossorigin.me/https://www.behance.net/v2/projects?client_id=FPPjPLS6sD6RL7XqmGyaaKJ1fgbhRnDh&q=${query}`
+    const requestUrl = `${getState().getIn(['requests', 'baseUrl'])}&q=${query}`
     dispatch(setRecentRequest(requestUrl))
     request.get(requestUrl)
     .end((err, res) => {
@@ -12,6 +12,26 @@ export function searchCovers(query) {
         dispatch(searchSuccess(res.body))
       }
     })
+  }
+}
+
+export function searchNewPage(increment) {
+  return function (dispatch, getState) {
+    const requestUrl = getState().getIn(['requests', 'recentUrl'])
+    const page = getState().getIn(['requests', 'page']) + increment
+    if (page > 0) {
+      dispatch(changeSearchPage(page))
+      request.get(`${requestUrl}&page=${page}`)
+      .end((err, res) => {
+        if (err) {
+          dispatch(searchError)
+        } else {
+          dispatch(searchSuccess(res.body))
+        }
+      })
+    } else {
+      dispatch(searchError)
+    }
   }
 }
 
@@ -25,6 +45,14 @@ function setRecentRequest(url) {
   return {
     type: 'SET_RECENT_REQUEST',
     url: url
+  }
+}
+
+
+function changeSearchPage (page) {
+  return {
+    type: 'CHANGE_SEARCH_PAGE',
+    page: page
   }
 }
 

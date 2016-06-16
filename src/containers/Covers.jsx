@@ -19,7 +19,11 @@ export class Covers extends React.Component {
   render () {
     return (
       <div>
-        <SearchCovers searchCovers={this.props.searchCovers}/>
+        <SearchCovers
+          searchNewPage={this.props.searchNewPage}
+          searchCovers={this.props.searchCovers}
+          searchPage={this.props.searchPage}
+          />
         <div className="covers">
           { this.getCovers() }
         </div>
@@ -31,7 +35,8 @@ export class Covers extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    covers: state.get('covers')
+    covers: state.get('covers'),
+    searchPage: state.getIn(['requests', 'page'])
   }
 }
 
