@@ -1,13 +1,13 @@
 import { updateBoard, addToBoard } from './reducers/board'
+import { setSearchResults, searchError } from './reducers/covers'
 import { Map, List } from 'immutable'
 
 const INITIAL_STATE = Map({
   activeBoard: 0,
-  projects: List.of(),
+  covers: List.of(),
   boards: List.of(
     List.of(
-       Map({ top: 20, left: 80, title: 'Drag me around', type: 'internalProject' }),
-       Map({ top: 180, left: 80, title: 'This should work', type: 'internalProject' })
+
     )
   )
 })
@@ -16,13 +16,13 @@ export default function (state = INITIAL_STATE, action) {
   console.log(action)
   switch(action.type) {
     case 'SET_SEARCH_RESULTS':
-      return state
+      return setSearchResults(state, action.response)
     case 'SEARCH_ERROR':
       return state
     case 'ADD_TO_BOARD':
-      return addToBoard(state, action.project)
+      return addToBoard(state, action.cover)
     case 'UPDATE_BOARD':
-      return updateBoard(state, action.project)
+      return updateBoard(state, action.cover)
     default:
       return state
   }

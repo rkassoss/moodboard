@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import update from 'react/lib/update'
-import Project from './Project'
+import Cover from './Cover'
 import { DropTarget } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
@@ -12,10 +12,10 @@ const boardTarget = {
     const delta = monitor.getDifferenceFromInitialOffset()
     const left = Math.round(item.left + delta.x)
     const top = Math.round(item.top + delta.y)
-    if (item.type === 'internalProject') {
-      component.moveProject(item.id, left, top)
+    if (item.onBoard) {
+      component.moveCover(item.id, left, top)
     } else {
-      component.addProject(item)
+      component.addCover(item)
     }
   }
 }
@@ -32,7 +32,7 @@ function collect(connect, monitor) {
 }
 
 export class Board extends Component {
-  moveProject(id, left, top) {
+  moveCover(id, left, top) {
     this.props.updateBoard({
       id: id,
       left: left,
@@ -40,10 +40,10 @@ export class Board extends Component {
     })
   }
 
-  addProject(project) {
+  addCover(cover) {
     this.props.addToBoard(
       {
-        title: project.title,
+        cover: cover.image,
         left: 0,
         top: 0
       }
@@ -51,21 +51,23 @@ export class Board extends Component {
   }
 
   render() {
-    const { hideSourceOnDrag, connectDropTarget, projects } = this.props
-    const projectsArray = projects.toJS()
+    console.log('hi')
+    const { hideSourceOnDrag, connectDropTarget, covers } = this.props
+    const coversArray = covers.toJS()
     return connectDropTarget(
       <div className='board'>
-        {projectsArray.map((project, idx) => {
-          const { left, top, title, type} = project
+        {coversArray.map((cover, idx) => {
+          const { left, top, title, type} = cover
           return (
-            <Project key={idx}
+            <Cover key={idx}
                  id={idx}
                  left={left}
                  top={top}
-                 type={type}
+                 onBoard={true}
+                 image={cover.cover}
                  hideSourceOnDrag={hideSourceOnDrag}>
               {title}
-            </Project>
+            </Cover>
           )
         })}
       </div>

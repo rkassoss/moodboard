@@ -1,13 +1,13 @@
-export function addToBoard(project) {
+export function addToBoard(cover) {
   return {
     type: 'ADD_TO_BOARD',
-    project: project
+    cover: cover
   }
 }
 
-export function updateBoard(project) {
+export function updateBoard(cover) {
   return {
     type: 'UPDATE_BOARD',
-    project: project
+    cover: cover
   }
 }

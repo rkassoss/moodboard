@@ -9,7 +9,7 @@ export class Boards extends React.Component {
     const { addToBoard, updateBoard, boards } = this.props
     return <Board addToBoard={addToBoard}
                   updateBoard={updateBoard}
-                  projects={boards.get(0)}
+                  covers={boards.get(0)}
                   hideSourceOnDrag={true}/>
   }
   render() {

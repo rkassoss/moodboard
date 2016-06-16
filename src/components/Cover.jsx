@@ -1,18 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { DragSource } from 'react-dnd'
 
-const style = {
-  position: 'absolute',
-  border: '1px dashed gray',
-  backgroundColor: 'white',
-  padding: '0.5rem 1rem',
-  cursor: 'move',
-}
-
-const projectSource = {
+const CoverSource = {
   beginDrag(props) {
-    const { id, left, top, type, title } = props
-    return { id, left, top, type, title }
+    const { id, left, top, onBoard, image } = props
+    return { id, left, top, onBoard, image }
   }
 }
 
@@ -24,23 +16,22 @@ function collect(connect, monitor) {
 }
 
 
-export class Project extends Component {
-
+export class Cover extends Component {
   render() {
     const { hideSourceOnDrag, left, top, connectDragSource, isDragging, children } = this.props
     if (isDragging && hideSourceOnDrag) {
       return null
     }
-    console.log(this.props.id)
+    console.log(this.props.image)
     return connectDragSource(
-      <div style={{ ...style, left, top }}>
+      <div className='cover' style={{ left, top, backgroundImage:`url(${this.props.image})`}}>
         {children}
       </div>
     )
   }
 }
 
-Project.propTypes = {
+Cover.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
   id: PropTypes.any.isRequired,
@@ -50,4 +41,4 @@ Project.propTypes = {
   children: PropTypes.node
 }
 
-export default DragSource('box', projectSource, collect)(Project)
+export default DragSource('box', CoverSource, collect)(Cover)
