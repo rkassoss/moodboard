@@ -1,22 +1,23 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
-export class CoverMeta extends React.Component {
+class CoverMeta extends React.Component {
   handleDelete (e) {
-    const { id, deleteCover, onBoard } = this.props
+    const { id, deleteCover } = this.props
     deleteCover(id)
   }
-  getDeleteButton() {
+  getDeleteButton () {
     const { onBoard } = this.props
     if (onBoard) {
       return (
-      <div className='delete'
-        onClick={this.handleDelete.bind(this)}>
-        x
-      </div>)
+        <div className='delete'
+          onClick={this.handleDelete.bind(this)}>
+         x
+        </div>
+      )
     }
   }
   render () {
-    const { name, publishedOn, views, onBoard } = this.props
+    const { name, views } = this.props
     return (
       <div className='meta'>
         <div className='info'>
@@ -26,8 +27,19 @@ export class CoverMeta extends React.Component {
             <span><strong>Views:</strong> {views}</span>
           </div>
         </div>
-        { this.getDeleteButton() }
+        {this.getDeleteButton()}
       </div>
     )
   }
 }
+
+CoverMeta.propTypes = {
+  id: PropTypes.number.isRequired,
+  deleteCover: PropTypes.func.isRequired,
+  onBoard: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  publishedOn: PropTypes.number.isRequired,
+  views: PropTypes.number.isRequired
+}
+
+export default CoverMeta

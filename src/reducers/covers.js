@@ -1,6 +1,6 @@
-import { Map, fromJS } from 'immutable'
+import { fromJS } from 'immutable'
 
-export function setSearchResults(state, response) {
+export function setSearchResults (state, response) {
   const covers = []
   response.projects.map((p) => {
     covers.push({
@@ -13,17 +13,17 @@ export function setSearchResults(state, response) {
   return state.set('covers', fromJS(covers))
 }
 
-export function searchError(state) {
+export function searchError (state) {
   return state
 }
 
-export function setRecentRequest(state, url) {
+export function setRecentRequest (state, url) {
   return state.update('requests', (r) => {
     return r.set('recentUrl', url).set('page', 1)
   })
 }
 
-export function changeSearchPage(state, page) {
+export function changeSearchPage (state, page) {
   return state.update('requests', (r) => {
     return r.set('page', page)
   })

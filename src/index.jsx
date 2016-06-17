@@ -17,7 +17,6 @@ export const DevTools = createDevTools(
   </DockMonitor>
 )
 
-
 const store = createStore(
   reducer,
   compose(
@@ -26,13 +25,12 @@ const store = createStore(
   )
 )
 
-
 ReactDOM.render(
   <Provider store={store}>
     <div>
       <App />
       <DevTools />
     </div>
-  </Provider> ,
+  </Provider>,
   document.getElementById('app')
 )

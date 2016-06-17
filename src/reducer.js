@@ -19,11 +19,11 @@ const INITIAL_STATE = Map({
 })
 
 export default function (state = INITIAL_STATE, action) {
-  switch(action.type) {
+  switch (action.type) {
     case 'SET_SEARCH_RESULTS':
       return setSearchResults(state, action.response)
     case 'SEARCH_ERROR':
-      return state
+      return searchError(state)
     case 'CHANGE_SEARCH_PAGE':
       return changeSearchPage(state, action.page)
     case 'SET_RECENT_REQUEST':

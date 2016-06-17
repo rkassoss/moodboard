@@ -1,6 +1,6 @@
 import request from 'superagent'
 
-export function searchCovers(query) {
+export function searchCovers (query) {
   return function (dispatch, getState) {
     const requestUrl = `${getState().getIn(['requests', 'baseUrl'])}&q=${query}`
     dispatch(setRecentRequest(requestUrl))
@@ -15,7 +15,7 @@ export function searchCovers(query) {
   }
 }
 
-export function searchNewPage(increment) {
+export function searchNewPage (increment) {
   return function (dispatch, getState) {
     const requestUrl = getState().getIn(['requests', 'recentUrl'])
     const page = getState().getIn(['requests', 'page']) + increment
@@ -27,24 +27,23 @@ export function searchNewPage(increment) {
         } else {
           dispatch(searchSuccess(res.body))
         }
-    })
+      }
+    )
   }
 }
 
-
-function searchError() {
+function searchError () {
   return {
     type: 'SEARCH_ERROR'
   }
 }
 
-function setRecentRequest(url) {
+function setRecentRequest (url) {
   return {
     type: 'SET_RECENT_REQUEST',
     url: url
   }
 }
-
 
 function changeSearchPage (page) {
   return {
@@ -53,7 +52,7 @@ function changeSearchPage (page) {
   }
 }
 
-function searchSuccess(response) {
+function searchSuccess (response) {
   return {
     type: 'SET_SEARCH_RESULTS',
     response: response

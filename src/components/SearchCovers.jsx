@@ -5,33 +5,38 @@ export class SearchCovers extends React.Component {
     e.preventDefault()
     this.props.searchCovers(this.refs.query.value)
   }
-  nextPage(e) {
+  nextPage (e) {
     e.preventDefault()
     this.props.searchNewPage(1)
   }
-  previousPage(e) {
+  previousPage (e) {
     e.preventDefault()
     this.props.searchNewPage(-1)
   }
   render () {
-    const searchPage = this.props
+    const { searchPage } = this.props
     return (
       <div className='search-control'>
         <form className='search-form' onSubmit={this.handleSubmit.bind(this)}>
           <label>Search Covers:</label>
-          <input type='text' ref='query' placeholder='e.g. Cats'/>
-          <input type='submit' value='Send'/>
+          <input type='text' ref='query' placeholder='e.g. Cats' />
+          <input type='submit' value='Send' />
         </form>
         <div className='pagination'>
           <button
-            style={{display: this.props.searchPage > 1 ? 'inline-block' : 'none'}}
+            style={{display: searchPage > 1 ? 'inline-block' : 'none'}}
             onClick={this.previousPage.bind(this)}>Prev</button>
           {this.props.searchPage}
-          <button
-            onClick={this.nextPage.bind(this)} >Next</button>
+          <button onClick={this.nextPage.bind(this)}>Next</button>
         </div>
       </div>
 
     )
   }
+}
+
+SearchCovers.propTypes = {
+  searchPage: PropTypes.number.isRequired,
+  searchNewPage: PropTypes.func.isRequired,
+  searchCovers: PropTypes.func.isRequired
 }

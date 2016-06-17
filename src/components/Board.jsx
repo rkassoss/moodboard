@@ -1,11 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import update from 'react/lib/update'
 import Cover from './Cover'
 import { DropTarget } from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
 
 const boardTarget = {
-  drop(props, monitor, component) {
+  drop (props, monitor, component) {
     const item = monitor.getItem()
     const delta = monitor.getDifferenceFromInitialOffset()
     const left = Math.round(item.left + delta.x)
@@ -18,14 +16,14 @@ const boardTarget = {
   }
 }
 
-function collect(connect, monitor) {
+function collect (connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget()
   }
 }
 
 export class Board extends Component {
-  moveCover(id, left, top) {
+  moveCover (id, left, top) {
     this.props.updateBoard({
       id: id,
       left: left,
@@ -33,34 +31,33 @@ export class Board extends Component {
     })
   }
 
-  addCover(cover, left, top) {
+  addCover (cover, left, top) {
     this.props.addToBoard(cover.set('left', left).set('top', top))
   }
-  getCovers() {
+  getCovers () {
     const { covers, deleteCover } = this.props
     return covers.map((cover, idx) => {
       return (
         <Cover key={idx}
-             id={idx}
-             left={cover.get('left')}
-             top={cover.get('top')}
-             onBoard={true}
-             cover={cover}
-             hideSourceOnDrag={true}
-             deleteCover={deleteCover}>
-        </Cover>
+          id={idx}
+          left={cover.get('left')}
+          top={cover.get('top')}
+          onBoard={true}
+          cover={cover}
+          hideSourceOnDrag={true}
+          deleteCover={deleteCover} />
       )
     })
   }
-  render() {
-    const { name, connectDropTarget }  = this.props
+  render () {
+    const { name, connectDropTarget } = this.props
     return connectDropTarget(
       <div className='board-container'>
         <div className='board-header'>
           <h3>{name}</h3>
         </div>
         <div className='board'>
-          { this.getCovers() }
+          {this.getCovers()}
         </div>
       </div>
     )
@@ -69,7 +66,12 @@ export class Board extends Component {
 
 Board.propTypes = {
   hideSourceOnDrag: PropTypes.bool.isRequired,
-  connectDropTarget: PropTypes.func.isRequired
+  connectDropTarget: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  updateBoard: PropTypes.func.isRequired,
+  addToBoard: PropTypes.func.isRequired,
+  deleteCover: PropTypes.func.isRequired,
+  covers: PropTypes.array.isRequired
 }
 
 export default DropTarget('box', boardTarget, collect)(Board)

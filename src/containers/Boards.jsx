@@ -2,20 +2,21 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Board from '../components/Board'
 import * as actionCreators from '../action-creators/board'
-import { BoardLink } from '../components/BoardLink'
-import { BoardControl } from '../components/BoardControl'
-
+import BoardLink from '../components/BoardLink'
+import BoardControl from '../components/BoardControl'
 
 export class Boards extends React.Component {
   getActiveBoard () {
     const { addToBoard, updateBoard, boards, activeBoard, deleteCover, clearBoard } = this.props
     const board = boards.get(activeBoard)
-    return <Board   clearBoard={clearBoard}
-                  deleteCover={deleteCover}
-                  addToBoard={addToBoard}
-                  updateBoard={updateBoard}
-                  covers={board.get('covers')}
-                  name={board.get('name')} />
+    return (
+      <Board clearBoard={clearBoard}
+        deleteCover={deleteCover}
+        addToBoard={addToBoard}
+        updateBoard={updateBoard}
+        covers={board.get('covers')}
+        name={board.get('name')} />
+    )
   }
   getBoardLinks () {
     const { boards, switchBoard } = this.props
@@ -23,21 +24,33 @@ export class Boards extends React.Component {
       return <BoardLink name={b.get('name')} id={i} switchBoard={switchBoard} />
     })
   }
-  render() {
-    const { activeBoard, boards, createBoard, renameBoard, clearBoard } = this.props
-     return (
-       <div className='boards'>
-         {this.getActiveBoard()}
-         <BoardControl
-           clearBoard={clearBoard}
-           createBoard={createBoard}
-           renameBoard={renameBoard} />
-         <div className="board-navigation">
-           { this.getBoardLinks() }
-         </div>
-       </div>
-     )
+  render () {
+    const { createBoard, renameBoard, clearBoard } = this.props
+    return (
+      <div className='boards'>
+        {this.getActiveBoard()}
+        <BoardControl
+          clearBoard={clearBoard}
+          createBoard={createBoard}
+          renameBoard={renameBoard} />
+        <div className='board-navigation'>
+          {this.getBoardLinks()}
+        </div>
+      </div>
+    )
   }
+}
+
+Boards.propTypes = {
+  addToBoard: PropTypes.func.isRequired,
+  updateBoard: PropTypes.func.isRequired,
+  activeBoard: PropTypes.bool.isRequired,
+  deleteCover: PropTypes.func.isRequired,
+  clearBoard: PropTypes.func.isRequired,
+  switchBoard: PropTypes.func.isRequired,
+  createBoard: PropTypes.func.isRequired,
+  renameBoard: PropTypes.func.isRequired,
+  boards: PropTypes.array.isRequired
 }
 
 function mapStateToProps (state) {

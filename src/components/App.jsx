@@ -1,9 +1,8 @@
 import React from 'react'
 import { BoardsContainer } from '../containers/Boards'
 import { CoversContainer } from '../containers/Covers'
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
-
+import { DragDropContext } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend'
 
 export class App extends React.Component {
   render () {

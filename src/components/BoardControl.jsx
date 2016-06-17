@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-export class BoardControl extends React.Component {
+class BoardControl extends React.Component {
   handleRename (e) {
     e.preventDefault()
     if (this.refs.rename.value.length > 0) {
@@ -10,7 +10,7 @@ export class BoardControl extends React.Component {
   }
   handleCreate (e) {
     e.preventDefault()
-    if(this.refs.name.value.length > 0) {
+    if (this.refs.name.value.length > 0) {
       this.props.createBoard(this.refs.name.value)
       this.refs.name.value = ''
     }
@@ -21,19 +21,27 @@ export class BoardControl extends React.Component {
   }
   render () {
     return (
-      <div className="board-control">
+      <div className='board-control'>
         <button onClick={this.handleClear.bind(this)}>Clear</button>
         <form onSubmit={this.handleRename.bind(this)}>
           <label>Rename Board:</label>
-          <input type='text' ref='rename'/>
-          <input type='submit' value='Save'/>
+          <input type='text' ref='rename' />
+          <input type='submit' value='Save' />
         </form>
         <form onSubmit={this.handleCreate.bind(this)}>
           <label>New Board:</label>
-          <input type='text' ref='name' placeholder='e.g. Catty moods'/>
-          <input type='submit' value='Create'/>
+          <input type='text' ref='name' placeholder='e.g. Catty moods' />
+          <input type='submit' value='Create' />
         </form>
       </div>
     )
   }
 }
+
+BoardControl.propTypes = {
+  createBoard: PropTypes.func.isRequired,
+  renameBoard: PropTypes.func.isRequired,
+  clearBoard: PropTypes.func.isRequired
+}
+
+export default BoardControl

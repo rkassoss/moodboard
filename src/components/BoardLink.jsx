@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-export class BoardLink extends React.Component {
+class BoardLink extends React.Component {
   handleClick (e) {
     e.preventDefault()
     const { switchBoard, id } = this.props
@@ -14,3 +14,11 @@ export class BoardLink extends React.Component {
     )
   }
 }
+
+BoardLink.propTypes = {
+  switchBoard: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired
+}
+
+export default BoardLink
