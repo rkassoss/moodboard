@@ -39,7 +39,7 @@ export class Covers extends React.Component {
 
 Covers.propTypes = {
   covers: PropTypes.array.isRequired,
-  deleteCover: PropTypes.function.isRequired,
+  deleteCover: PropTypes.func.isRequired,
   searchPage: PropTypes.number.isRequired,
   searchNewPage: PropTypes.func.isRequired,
   searchCovers: PropTypes.func.isRequired

@@ -1,4 +1,4 @@
-import { updateBoard, addToBoard, renameBoard, createBoard, switchBoard, deleteCover, clearBoard } from './reducers/board'
+import { updateBoard, addToBoard, renameBoard, createBoard, switchBoard, deleteCover, clearBoard, toggleGrid } from './reducers/board'
 import { setSearchResults, setRecentRequest, searchError, changeSearchPage } from './reducers/covers'
 import { Map, List } from 'immutable'
 
@@ -6,7 +6,7 @@ const INITIAL_STATE = Map({
   activeBoard: 0,
   requests: Map({
     baseUrl: 'https://crossorigin.me/https://www.behance.net/v2/projects?client_id=FPPjPLS6sD6RL7XqmGyaaKJ1fgbhRnDh',
-    recentUrl: null,
+    recentUrl: 'https://crossorigin.me/https://www.behance.net/v2/projects?client_id=FPPjPLS6sD6RL7XqmGyaaKJ1fgbhRnDh',
     page: 1
   }),
   covers: List.of(),
@@ -15,7 +15,8 @@ const INITIAL_STATE = Map({
       name: 'Untitled',
       covers: List.of()
     })
-  )
+  ),
+  grid: false
 })
 
 export default function (state = INITIAL_STATE, action) {
@@ -42,6 +43,8 @@ export default function (state = INITIAL_STATE, action) {
       return switchBoard(state, action.id)
     case 'CLEAR_BOARD':
       return clearBoard(state)
+    case 'TOGGLE_GRID':
+      return toggleGrid(state)
     default:
       return state
   }

@@ -1,9 +1,14 @@
 import { Map, List, fromJS } from 'immutable'
 
 export function updateBoard (state, cover) {
-  return state.updateIn(['boards', state.get('activeBoard'), 'covers', cover.id], p => {
-    return p.set('left', cover.left).set('top', cover.top)
+  return state.updateIn(['boards', state.get('activeBoard'), 'covers', cover.id], c => {
+    return updatePostion(state.get('grid'), c, cover.left, cover.top)
   })
+}
+
+function updatePostion (grid, cover, left, top) {
+  return grid ? cover.set('left', Math.round(left / 32) * 32).set('top', Math.round(top / 32) * 32) :
+  cover.set('left', left).set('top', top)
 }
 
 export function addToBoard (state, cover) {
@@ -37,4 +42,8 @@ export function deleteCover (state, id) {
   return state.updateIn(['boards', state.get('activeBoard'), 'covers'], (b) => {
     return b.delete(id)
   })
+}
+
+export function toggleGrid (state) {
+  return state.update('grid', grid => !grid)
 }

@@ -25,14 +25,16 @@ export class Boards extends React.Component {
     })
   }
   render () {
-    const { createBoard, renameBoard, clearBoard } = this.props
+    const { createBoard, renameBoard, clearBoard, toggleGrid, grid } = this.props
     return (
       <div className='boards'>
         {this.getActiveBoard()}
         <BoardControl
           clearBoard={clearBoard}
           createBoard={createBoard}
-          renameBoard={renameBoard} />
+          renameBoard={renameBoard}
+          toggleGrid={toggleGrid}
+          grid={grid} />
         <div className='board-navigation'>
           {this.getBoardLinks()}
         </div>
@@ -50,13 +52,16 @@ Boards.propTypes = {
   switchBoard: PropTypes.func.isRequired,
   createBoard: PropTypes.func.isRequired,
   renameBoard: PropTypes.func.isRequired,
-  boards: PropTypes.array.isRequired
+  toggleGrid: PropTypes.func.isRequired,
+  boards: PropTypes.array.isRequired,
+  grid: PropTypes.bool.isRequired
 }
 
 function mapStateToProps (state) {
   return {
     activeBoard: state.get('activeBoard'),
-    boards: state.get('boards')
+    boards: state.get('boards'),
+    grid: state.get('grid')
   }
 }
 

@@ -20,9 +20,11 @@ class BoardControl extends React.Component {
     this.props.clearBoard()
   }
   render () {
+    const { clearBoard, toggleGrid, grid } = this.props
     return (
       <div className='board-control'>
-        <button onClick={this.handleClear.bind(this)}>Clear</button>
+        <button onClick={() => toggleGrid()}>Turn Grid {grid ? 'Off' : 'On'}</button>
+        <button onClick={() => clearBoard()}>Clear</button>
         <form onSubmit={this.handleRename.bind(this)}>
           <label>Rename Board:</label>
           <input type='text' ref='rename' />
@@ -41,7 +43,9 @@ class BoardControl extends React.Component {
 BoardControl.propTypes = {
   createBoard: PropTypes.func.isRequired,
   renameBoard: PropTypes.func.isRequired,
-  clearBoard: PropTypes.func.isRequired
+  clearBoard: PropTypes.func.isRequired,
+  toggleGrid: PropTypes.func.isRequired,
+  grid: PropTypes.bool.isRequired
 }
 
 export default BoardControl

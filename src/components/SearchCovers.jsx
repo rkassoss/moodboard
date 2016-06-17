@@ -24,9 +24,9 @@ export class SearchCovers extends React.Component {
         </form>
         <div className='pagination'>
           <button
-            style={{display: searchPage > 1 ? 'inline-block' : 'none'}}
+            style={{visibility: searchPage > 1 ? 'visible' : 'hidden'}}
             onClick={this.previousPage.bind(this)}>Prev</button>
-          {this.props.searchPage}
+          <div className='page'>{this.props.searchPage}</div>
           <button onClick={this.nextPage.bind(this)}>Next</button>
         </div>
       </div>

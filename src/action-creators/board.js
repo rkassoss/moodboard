@@ -45,3 +45,9 @@ export function deleteCover (id) {
     id: id
   }
 }
+
+export function toggleGrid () {
+  return {
+    type: 'TOGGLE_GRID'
+  }
+}

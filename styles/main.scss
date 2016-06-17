@@ -46,6 +46,9 @@ body {
             display: block;
             background: white;
             padding: 5px;
+            &:hover {
+              cursor: pointer;
+            }
             span {
               display: block;
               margin: 5px;
@@ -84,20 +87,25 @@ body {
 
 .search-control {
   width: 100%;
+  padding: 5px 0;
   .search-form, .pagination {
     display: inline-block;
     margin: 0 20px 0 0;
   }
-
+  .page {
+    display: inline-block;
+    margin: 0 10px;
+  }
 }
 
 .board-container {
   .board {
     position: relative;
     width: 100%;
-    min-height: 300px;
+    min-height: 600px;
     border: 2px solid black;
     display: block;
+    overflow: hidden;
   }
 }
 
