@@ -1,9 +1,8 @@
 import { Map, List, fromJS } from 'immutable'
 
 export function updateBoard (state, cover) {
-  return state.updateIn(['boards', state.get('activeBoard'), 'covers', cover.id], c => {
-    return updatePostion(state.get('grid'), c, cover.left, cover.top)
-  })
+  return state.updateIn(['boards', state.get('activeBoard'), 'covers', cover.id], c =>
+  updatePostion(state.get('grid'), c, cover.left, cover.top))
 }
 
 function updatePostion (grid, cover, left, top) {
@@ -12,9 +11,8 @@ function updatePostion (grid, cover, left, top) {
 }
 
 export function addToBoard (state, cover) {
-  return state.updateIn(['boards', state.get('activeBoard'), 'covers'], board => {
-    return board.push(fromJS(cover))
-  })
+  return state.updateIn(['boards', state.get('activeBoard'), 'covers'], b =>
+  b.push(fromJS(cover)))
 }
 
 export function renameBoard (state, name) {
@@ -39,9 +37,7 @@ export function clearBoard (state) {
 }
 
 export function deleteCover (state, id) {
-  return state.updateIn(['boards', state.get('activeBoard'), 'covers'], (b) => {
-    return b.delete(id)
-  })
+  return state.updateIn(['boards', state.get('activeBoard'), 'covers'], b => b.delete(id))
 }
 
 export function toggleGrid (state) {

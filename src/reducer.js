@@ -2,11 +2,13 @@ import { updateBoard, addToBoard, renameBoard, createBoard, switchBoard, deleteC
 import { setSearchResults, setRecentRequest, searchError, changeSearchPage } from './reducers/covers'
 import { Map, List } from 'immutable'
 
+const corsProxy = 'https://crossorigin.me/'
+const apiKey = 'FPPjPLS6sD6RL7XqmGyaaKJ1fgbhRnDh'
 const INITIAL_STATE = Map({
   activeBoard: 0,
   requests: Map({
-    baseUrl: 'https://crossorigin.me/https://www.behance.net/v2/projects?client_id=FPPjPLS6sD6RL7XqmGyaaKJ1fgbhRnDh',
-    recentUrl: 'https://crossorigin.me/https://www.behance.net/v2/projects?client_id=FPPjPLS6sD6RL7XqmGyaaKJ1fgbhRnDh',
+    baseUrl: `${corsProxy}https://www.behance.net/v2/projects?client_id=${apiKey}`,
+    recentUrl: `${corsProxy}https://www.behance.net/v2/projects?client_id=${apiKey}`,
     page: 1
   }),
   covers: List.of(),

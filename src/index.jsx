@@ -6,7 +6,7 @@ import LogMonitor from 'redux-devtools-log-monitor'
 import DockMonitor from 'redux-devtools-dock-monitor'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
-import App from './components/App.jsx'
+import App from './containers/App.jsx'
 import reducer from './reducer.js'
 
 require('../styles/main.scss')

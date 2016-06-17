@@ -3,7 +3,7 @@ import CoverMeta from './CoverMeta'
 import { DragSource } from 'react-dnd'
 
 const CoverSource = {
-  //  TODO Write better function for offset
+  //  TODO Write better function or don't hard code this...
   beginDrag (props) {
     let { id, left, top, onBoard, cover } = props
     if (!onBoard) {
@@ -18,6 +18,7 @@ const CoverSource = {
     return { id, left, top, onBoard, cover }
   }
 }
+
 
 function collect (connect, monitor) {
   return {
