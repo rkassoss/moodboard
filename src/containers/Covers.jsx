@@ -6,7 +6,7 @@ import * as actionCreators from '../action-creators/covers'
 
 export class Covers extends React.Component {
   getCovers () {
-    const { deleteCover, covers } = this.props
+    const { covers } = this.props
     return covers.map((cover, idx) => {
       return (
         <Cover key={idx}
@@ -16,8 +16,7 @@ export class Covers extends React.Component {
           onBoard={false}
           cover={cover}
           hideSourceOnDrag={false}
-          deleteCover={deleteCover}
-          />
+        />
         )
     })
   }
@@ -28,7 +27,7 @@ export class Covers extends React.Component {
           searchNewPage={this.props.searchNewPage}
           searchCovers={this.props.searchCovers}
           searchPage={this.props.searchPage}
-          />
+        />
         <div className='covers'>
           {this.getCovers()}
         </div>
@@ -38,8 +37,7 @@ export class Covers extends React.Component {
 }
 
 Covers.propTypes = {
-  covers: PropTypes.array.isRequired,
-  deleteCover: PropTypes.func.isRequired,
+  covers: PropTypes.object.isRequired,
   searchPage: PropTypes.number.isRequired,
   searchNewPage: PropTypes.func.isRequired,
   searchCovers: PropTypes.func.isRequired

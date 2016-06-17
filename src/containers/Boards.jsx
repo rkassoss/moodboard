@@ -10,18 +10,21 @@ export class Boards extends React.Component {
     const { addToBoard, updateBoard, boards, activeBoard, deleteCover, clearBoard } = this.props
     const board = boards.get(activeBoard)
     return (
-      <Board clearBoard={clearBoard}
+      <Board
+        hideSourceOnDrag={true}
+        clearBoard={clearBoard}
         deleteCover={deleteCover}
         addToBoard={addToBoard}
         updateBoard={updateBoard}
         covers={board.get('covers')}
-        name={board.get('name')} />
+        name={board.get('name')}
+      />
     )
   }
   getBoardLinks () {
     const { boards, switchBoard } = this.props
     return boards.map((b, i) => {
-      return <BoardLink name={b.get('name')} id={i} switchBoard={switchBoard} />
+      return <BoardLink key={i} name={b.get('name')} id={i} switchBoard={switchBoard} />
     })
   }
   render () {
@@ -46,14 +49,14 @@ export class Boards extends React.Component {
 Boards.propTypes = {
   addToBoard: PropTypes.func.isRequired,
   updateBoard: PropTypes.func.isRequired,
-  activeBoard: PropTypes.bool.isRequired,
+  activeBoard: PropTypes.number.isRequired,
   deleteCover: PropTypes.func.isRequired,
   clearBoard: PropTypes.func.isRequired,
   switchBoard: PropTypes.func.isRequired,
   createBoard: PropTypes.func.isRequired,
   renameBoard: PropTypes.func.isRequired,
   toggleGrid: PropTypes.func.isRequired,
-  boards: PropTypes.array.isRequired,
+  boards: PropTypes.object.isRequired,
   grid: PropTypes.bool.isRequired
 }
 

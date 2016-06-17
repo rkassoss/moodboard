@@ -1,5 +1,5 @@
 import React from 'react'
-import { BoardsContainer } from './/Boards'
+import { BoardsContainer } from './Boards'
 import { CoversContainer } from './Covers'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'

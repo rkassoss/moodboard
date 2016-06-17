@@ -41,20 +41,20 @@ function searchError () {
 function setRecentRequest (url) {
   return {
     type: 'SET_RECENT_REQUEST',
-    url: url
+    url
   }
 }
 
 function changeSearchPage (page) {
   return {
     type: 'CHANGE_SEARCH_PAGE',
-    page: page
+    page
   }
 }
 
 function searchSuccess (response) {
   return {
     type: 'SET_SEARCH_RESULTS',
-    response: response
+    response
   }
 }

@@ -1,18 +1,20 @@
 import { Map, List, fromJS } from 'immutable'
 
 export function updateBoard (state, cover) {
-  return state.updateIn(['boards', state.get('activeBoard'), 'covers', cover.id], c =>
-  updatePostion(state.get('grid'), c, cover.left, cover.top))
+  return state.updateIn(['boards', state.get('activeBoard'), 'covers', cover.id], nextCover =>
+  updatePostion(state.get('grid'), nextCover, cover.left, cover.top))
 }
 
 function updatePostion (grid, cover, left, top) {
-  return grid ? cover.set('left', Math.round(left / 32) * 32).set('top', Math.round(top / 32) * 32) :
-  cover.set('left', left).set('top', top)
+  return grid
+  ? cover.set('left', Math.round(left / 32) * 32).set('top', Math.round(top / 32) * 32)
+  : cover.set('left', left).set('top', top)
 }
 
 export function addToBoard (state, cover) {
-  return state.updateIn(['boards', state.get('activeBoard'), 'covers'], b =>
-  b.push(fromJS(cover)))
+  return state.updateIn(['boards', state.get('activeBoard'), 'covers'], board =>
+    board.push(fromJS(cover))
+  )
 }
 
 export function renameBoard (state, name) {
@@ -20,12 +22,7 @@ export function renameBoard (state, name) {
 }
 
 export function createBoard (state, name) {
-  return state.update('boards', (b) => {
-    return b.push(Map({
-      name: name,
-      covers: List()
-    }))
-  })
+  return state.update('boards', board => board.push(Map({name: name, covers: List()})))
 }
 
 export function switchBoard (state, id) {
@@ -37,7 +34,7 @@ export function clearBoard (state) {
 }
 
 export function deleteCover (state, id) {
-  return state.updateIn(['boards', state.get('activeBoard'), 'covers'], b => b.delete(id))
+  return state.updateIn(['boards', state.get('activeBoard'), 'covers'], board => board.delete(id))
 }
 
 export function toggleGrid (state) {

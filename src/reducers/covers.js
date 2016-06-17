@@ -18,9 +18,9 @@ export function searchError (state) {
 }
 
 export function setRecentRequest (state, url) {
-  return state.update('requests', r => r.set('recentUrl', url).set('page', 1))
+  return state.update('requests', requests => requests.set('recentUrl', url).set('page', 1))
 }
 
 export function changeSearchPage (state, page) {
-  return state.update('requests', r => r.set('page', page))
+  return state.update('requests', requests => requests.set('page', page))
 }

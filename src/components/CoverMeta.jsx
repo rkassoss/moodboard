@@ -35,7 +35,7 @@ class CoverMeta extends React.Component {
 
 CoverMeta.propTypes = {
   id: PropTypes.number.isRequired,
-  deleteCover: PropTypes.func.isRequired,
+  deleteCover: PropTypes.func,
   onBoard: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   publishedOn: PropTypes.number.isRequired,

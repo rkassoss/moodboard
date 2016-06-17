@@ -3,7 +3,7 @@ import CoverMeta from './CoverMeta'
 import { DragSource } from 'react-dnd'
 
 const CoverSource = {
-  //  TODO Write better function or don't hard code this...
+  //  TODO Write better function to handle or don't hard code this...
   beginDrag (props) {
     let { id, left, top, onBoard, cover } = props
     if (!onBoard) {
@@ -18,7 +18,6 @@ const CoverSource = {
     return { id, left, top, onBoard, cover }
   }
 }
-
 
 function collect (connect, monitor) {
   return {
@@ -48,7 +47,8 @@ export class Cover extends Component {
           name={cover.get('name')}
           publishedOn={cover.get('publishedOn')}
           views={cover.get('views')}
-          deleteCover={deleteCover} />
+          deleteCover={deleteCover}
+        />
       </div>
     )
   }

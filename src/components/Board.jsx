@@ -45,7 +45,8 @@ export class Board extends Component {
           onBoard={true}
           cover={cover}
           hideSourceOnDrag={true}
-          deleteCover={deleteCover} />
+          deleteCover={deleteCover}
+        />
       )
     })
   }
@@ -71,7 +72,7 @@ Board.propTypes = {
   updateBoard: PropTypes.func.isRequired,
   addToBoard: PropTypes.func.isRequired,
   deleteCover: PropTypes.func.isRequired,
-  covers: PropTypes.array.isRequired
+  covers: PropTypes.object.isRequired
 }
 
 export default DropTarget('box', boardTarget, collect)(Board)

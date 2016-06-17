@@ -8,12 +8,6 @@ module.exports = {
     './src/index.jsx'
   ],
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        loaders: [ 'eslint' ]
-      }  
-    ],
     loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
