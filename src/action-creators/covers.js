@@ -19,21 +19,18 @@ export function searchNewPage(increment) {
   return function (dispatch, getState) {
     const requestUrl = getState().getIn(['requests', 'recentUrl'])
     const page = getState().getIn(['requests', 'page']) + increment
-    if (page > 0) {
-      dispatch(changeSearchPage(page))
-      request.get(`${requestUrl}&page=${page}`)
+    dispatch(changeSearchPage(page))
+    request.get(`${requestUrl}&page=${page}`)
       .end((err, res) => {
         if (err) {
           dispatch(searchError)
         } else {
           dispatch(searchSuccess(res.body))
         }
-      })
-    } else {
-      dispatch(searchError)
-    }
+    })
   }
 }
+
 
 function searchError() {
   return {

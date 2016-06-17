@@ -32,3 +32,17 @@ export function switchBoard(id) {
     id: id
   }
 }
+
+export function clearBoard() {
+  return {
+    type: 'CLEAR_BOARD',
+  }
+}
+
+
+export function deleteCover(id) {
+  return {
+    type: 'DELETE_COVER',
+    id: id
+  }
+}

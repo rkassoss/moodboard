@@ -28,3 +28,13 @@ export function createBoard(state, name) {
 export function switchBoard(state, id) {
   return state.set('activeBoard', id)
 }
+
+export function clearBoard(state) {
+  return state.setIn(['boards', state.get('activeBoard'), 'covers'], List())
+}
+
+export function deleteCover(state, id) {
+  return state.updateIn(['boards', state.get('activeBoard'), 'covers'], (b) => {
+    return b.delete(id)
+  })
+}

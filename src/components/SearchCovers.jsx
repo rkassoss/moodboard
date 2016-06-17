@@ -17,14 +17,14 @@ export class SearchCovers extends React.Component {
     const searchPage = this.props
     return (
       <div className='search-control'>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+        <form className='search-form' onSubmit={this.handleSubmit.bind(this)}>
           <label>Search Covers:</label>
           <input type='text' ref='query' placeholder='e.g. Cats'/>
           <input type='submit' value='Send'/>
         </form>
         <div className='pagination'>
           <button
-            style={{display: this.props.searchPage > 1 ? 'block' : 'none'}}
+            style={{display: this.props.searchPage > 1 ? 'inline-block' : 'none'}}
             onClick={this.previousPage.bind(this)}>Prev</button>
           {this.props.searchPage}
           <button

@@ -1,20 +1,21 @@
 import React, { Component, PropTypes } from 'react'
+import { CoverMeta } from './CoverMeta'
 import { DragSource } from 'react-dnd'
 
 const CoverSource = {
+  //TODO Write better function for offset
   beginDrag(props) {
-    let { id, left, top, onBoard, image } = props
+    let { id, left, top, onBoard, cover } = props
     if(!onBoard) {
       if (id > 5) {
         left = left + 202 * (id - 6)
-        top = top - 164
+        top = top - 214
       } else {
         left = left + 202 * id
-        top = top - 322
+        top = top - 372
       }
-      return { id, left, top, onBoard, image }
     }
-    return { id, left, top, onBoard, image }
+    return { id, left, top, onBoard, cover }
   }
 }
 
@@ -28,13 +29,27 @@ function collect(connect, monitor) {
 
 export class Cover extends Component {
   render() {
-    const { hideSourceOnDrag, left, top, connectDragSource, isDragging, children } = this.props
+    const { id,
+      hideSourceOnDrag,
+      left,
+      top,
+      connectDragSource,
+      isDragging,
+      children,
+      onBoard,
+      cover,
+      deleteCover } = this.props
     if (isDragging && hideSourceOnDrag) {
       return null
     }
     return connectDragSource(
-      <div className='cover' style={{ left, top, backgroundImage:`url(${this.props.image})`}}>
-        {children}
+      <div className='cover' style={{ left, top, backgroundImage:`url(${cover.get('image')})`}}>
+        <CoverMeta id={id}
+          onBoard={onBoard}
+          name={cover.get('name')}
+          publishedOn={cover.get('publishedOn')}
+          views={cover.get('views')}
+          deleteCover={deleteCover}/>
       </div>
     )
   }

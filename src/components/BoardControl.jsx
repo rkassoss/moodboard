@@ -15,12 +15,17 @@ export class BoardControl extends React.Component {
       this.refs.name.value = ''
     }
   }
+  handleClear (e) {
+    e.preventDefault()
+    this.props.clearBoard()
+  }
   render () {
     return (
       <div className="board-control">
+        <button onClick={this.handleClear.bind(this)}>Clear</button>
         <form onSubmit={this.handleRename.bind(this)}>
           <label>Rename Board:</label>
-          <input type='text' ref='rename' value={this.props.name}/>
+          <input type='text' ref='rename'/>
           <input type='submit' value='Save'/>
         </form>
         <form onSubmit={this.handleCreate.bind(this)}>

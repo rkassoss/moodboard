@@ -1,4 +1,4 @@
-import { updateBoard, addToBoard, renameBoard, createBoard, switchBoard } from './reducers/board'
+import { updateBoard, addToBoard, renameBoard, createBoard, switchBoard, deleteCover, clearBoard } from './reducers/board'
 import { setSearchResults, setRecentRequest, searchError, changeSearchPage } from './reducers/covers'
 import { Map, List } from 'immutable'
 
@@ -28,6 +28,8 @@ export default function (state = INITIAL_STATE, action) {
       return changeSearchPage(state, action.page)
     case 'SET_RECENT_REQUEST':
       return setRecentRequest(state, action.url)
+    case 'DELETE_COVER':
+      return deleteCover(state, action.id)
     case 'ADD_TO_BOARD':
       return addToBoard(state, action.cover)
     case 'UPDATE_BOARD':
@@ -38,6 +40,8 @@ export default function (state = INITIAL_STATE, action) {
       return createBoard(state, action.name)
     case 'SWITCH_BOARD':
       return switchBoard(state, action.id)
+    case 'CLEAR_BOARD':
+      return clearBoard(state)
     default:
       return state
   }

@@ -4,8 +4,6 @@ import Cover from './Cover'
 import { DropTarget } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
-
-
 const boardTarget = {
   drop(props, monitor, component) {
     const item = monitor.getItem()
@@ -15,7 +13,7 @@ const boardTarget = {
     if (item.onBoard) {
       component.moveCover(item.id, left, top)
     } else {
-      component.addCover(item, left, top)
+      component.addCover(item.cover, left, top)
     }
   }
 }
@@ -36,37 +34,34 @@ export class Board extends Component {
   }
 
   addCover(cover, left, top) {
-    this.props.addToBoard(
-      {
-        cover: cover.image,
-        left: left,
-        top: top
-      }
-    )
+    this.props.addToBoard(cover.set('left', left).set('top', top))
   }
   getCovers() {
-    const { covers } = this.props
-    const coversArray = covers.toJS()
-    return coversArray.map((cover, idx) => {
-      const { left, top, title, type} = cover
+    const { covers, deleteCover } = this.props
+    return covers.map((cover, idx) => {
       return (
         <Cover key={idx}
              id={idx}
-             left={left}
-             top={top}
+             left={cover.get('left')}
+             top={cover.get('top')}
              onBoard={true}
-             image={cover.cover}
-             hideSourceOnDrag={true}>
-          {title}
+             cover={cover}
+             hideSourceOnDrag={true}
+             deleteCover={deleteCover}>
         </Cover>
       )
     })
   }
   render() {
-    const { connectDropTarget }  = this.props
+    const { name, connectDropTarget }  = this.props
     return connectDropTarget(
-      <div className='board'>
-        { this.getCovers() }
+      <div className='board-container'>
+        <div className='board-header'>
+          <h3>{name}</h3>
+        </div>
+        <div className='board'>
+          { this.getCovers() }
+        </div>
       </div>
     )
   }

@@ -4,7 +4,10 @@ export function setSearchResults(state, response) {
   const covers = []
   response.projects.map((p) => {
     covers.push({
-      image: p.covers[202]
+      image: p.covers[202],
+      publishedOn: p.published_on,
+      views: p.stats.views,
+      name: p.name
     })
   })
   return state.set('covers', fromJS(covers))

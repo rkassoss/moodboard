@@ -8,9 +8,11 @@ import { BoardControl } from '../components/BoardControl'
 
 export class Boards extends React.Component {
   getActiveBoard () {
-    const { addToBoard, updateBoard, boards, activeBoard } = this.props
+    const { addToBoard, updateBoard, boards, activeBoard, deleteCover, clearBoard } = this.props
     const board = boards.get(activeBoard)
-    return <Board addToBoard={addToBoard}
+    return <Board   clearBoard={clearBoard}
+                  deleteCover={deleteCover}
+                  addToBoard={addToBoard}
                   updateBoard={updateBoard}
                   covers={board.get('covers')}
                   name={board.get('name')} />
@@ -22,11 +24,14 @@ export class Boards extends React.Component {
     })
   }
   render() {
-    const { createBoard, renameBoard } = this.props
+    const { activeBoard, boards, createBoard, renameBoard, clearBoard } = this.props
      return (
-       <div className='board-container'>
+       <div className='boards'>
          {this.getActiveBoard()}
-         <BoardControl createBoard={createBoard} renameBoard={renameBoard} />
+         <BoardControl
+           clearBoard={clearBoard}
+           createBoard={createBoard}
+           renameBoard={renameBoard} />
          <div className="board-navigation">
            { this.getBoardLinks() }
          </div>

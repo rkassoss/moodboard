@@ -6,14 +6,17 @@ import * as actionCreators from '../action-creators/covers'
 
 export class Covers extends React.Component {
   getCovers () {
-    return this.props.covers.map((cover, idx) => {
+    const { deleteCover, covers } = this.props
+    return covers.map((cover, idx) => {
       return <Cover key={idx}
                     id={idx}
                     top={0}
                     left={0}
                     onBoard={false}
-                    image={cover.get('image')}
-                    hideSourceOnDrag={false} />
+                    cover={cover}
+                    hideSourceOnDrag={false}
+                    deleteCover={deleteCover}
+                    />
     })
   }
   render () {

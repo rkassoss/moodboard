@@ -15,7 +15,60 @@ body {
   width: 202px;
   height: 158px;
   background-size: cover;
-}
+  .meta {
+    display: none;
+  }
+  &:hover {
+    .meta {
+      display: block;
+      float: right;
+      .info {
+        position: relative;
+        display: block;
+        position: relative;
+        background: white;
+        height: 25px;
+        width: 25px;
+        line-height: 25px;
+        text-align: center;
+        background-color: white;
+        overflow: visible;
+        .tooltip { display: none;}
+        &:hover {
+          .tooltip {
+            top: - 5px;
+            left: 35px;
+            width: 100px;
+            text-align: left;
+            line-height:  20px;
+            position: absolute;
+            z-index: 99;
+            display: block;
+            background: white;
+            padding: 5px;
+            span {
+              display: block;
+              margin: 5px;
+            }
+          }
+        }
+      }
+      .delete {
+        position: relative;
+        display: block;
+        position: relative;
+        background: white;
+        height: 25px;
+        width: 25px;
+        line-height: 25px;
+        text-align: center;
+        background-color: red;
+        color: white;
+      }
+      }
+    }
+  }
+
 
 .covers {
   width: 100%;
@@ -25,9 +78,18 @@ body {
   .cover {
     position: relative;
     float: left;
+
   }
 }
 
+.search-control {
+  width: 100%;
+  .search-form, .pagination {
+    display: inline-block;
+    margin: 0 20px 0 0;
+  }
+
+}
 
 .board-container {
   .board {
@@ -41,12 +103,20 @@ body {
 
 .board-control {
   display: block;
-  width: 50%;
   padding: 10px;
+  width: 65%;
   margin: auto;
   form {
     padding: 0 10px;
     display: inline-block;
+  }
+}
+
+.board-header {
+  text-align: center;
+  h3 {
+    margin: 0;
+    line-height: 50px;
   }
 }
 
