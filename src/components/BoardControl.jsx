@@ -15,10 +15,6 @@ class BoardControl extends React.Component {
       this.refs.name.value = ''
     }
   }
-  handleClear (e) {
-    e.preventDefault()
-    this.props.clearBoard()
-  }
   render () {
     const { clearBoard, toggleGrid, grid } = this.props
     return (
