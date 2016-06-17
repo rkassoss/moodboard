@@ -7,7 +7,7 @@ export function updateBoard (state, cover) {
 
 function updatePostion (grid, cover, left, top) {
   return grid
-  ? cover.set('left', Math.round(left / 32) * 32).set('top', Math.round(top / 32) * 32)
+  ? cover.set('left', Math.round(left / 50) * 50).set('top', Math.round(top / 39) * 39)
   : cover.set('left', left).set('top', top)
 }
 
